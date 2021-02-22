@@ -12,7 +12,7 @@ type CurrentWeather = {
     temp: string;
 }
 
-interface WeatherDataApi {
+interface WeatherDataApiResponse {
     weather: WeatherDescription[];
     main: CurrentWeather;
     statusText: string;
@@ -33,7 +33,7 @@ export class Weather {
 
     async getCurrentWeather(city: string): Promise<WeatherForUserSpecifiedCity> {
         // Request to https://openweathermap.org/api
-        const response: AxiosResponse<WeatherDataApi> = await axios.get(this.WEATHER_API_URL, {
+        const response: AxiosResponse<WeatherDataApiResponse> = await axios.get(this.WEATHER_API_URL, {
             "params": {
                 q: city,
                 appid: process.env.WEATHER_API_KEY,
