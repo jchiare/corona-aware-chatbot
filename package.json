@@ -7,7 +7,7 @@
     "start": "node build/index.js",
     "predev": "npm run swagger",
     "prebuild": "npm run swagger",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "swagger": "tsoa spec"
   },
@@ -22,6 +22,8 @@
   "author": "Jay Chiarella",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "swagger-ui-express": "^4.1.6",
