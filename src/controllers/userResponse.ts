@@ -39,8 +39,8 @@ export default class UserResponseController {
             }
         }
 
-        const cityWeatherService = new Weather(userSpecifiedCity['name'])
-        const currentCityWeather = await cityWeatherService.getCurrentWeather()
+        const cityWeatherService = new Weather()
+        const currentCityWeather = await cityWeatherService.getCurrentWeather(userSpecifiedCity['name'])
 
         const countryCovidCasesService = new CovidCases()
         const activeCovidCases = await countryCovidCasesService.getActiveCovidCasesByCountryCode(userSpecifiedCity['countryCode'])

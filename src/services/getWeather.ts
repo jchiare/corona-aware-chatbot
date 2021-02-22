@@ -27,19 +27,15 @@ export interface WeatherForUserSpecifiedCity {
 export class Weather {
 
     private WEATHER_API_URL: string = "https://api.openweathermap.org/data/2.5/weather"
-    city: string;
-    private countryCode?: string;
 
-
-    constructor(city: string) {
-        this.city = city;
+    constructor() {
     }
 
-    async getCurrentWeather(): Promise<WeatherForUserSpecifiedCity> {
+    async getCurrentWeather(city: string): Promise<WeatherForUserSpecifiedCity> {
         // Request to https://openweathermap.org/api
         const response: AxiosResponse<WeatherDataApi> = await axios.get(this.WEATHER_API_URL, {
             "params": {
-                q: this.city,
+                q: city,
                 appid: process.env.WEATHER_API_KEY,
                 units: 'metric'
             }
