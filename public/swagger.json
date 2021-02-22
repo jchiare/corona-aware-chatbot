@@ -18,37 +18,10 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"WeatherForUserSpecifiedCity": {
-				"properties": {
-					"shortDescription": {
-						"type": "string"
-					},
-					"longerDescription": {
-						"type": "string"
-					},
-					"temperature": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"shortDescription",
-					"longerDescription",
-					"temperature"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"UserResponse": {
 				"properties": {
 					"message": {
-						"anyOf": [
-							{
-								"type": "string"
-							},
-							{
-								"$ref": "#/components/schemas/WeatherForUserSpecifiedCity"
-							}
-						]
+						"type": "string"
 					},
 					"successful": {
 						"type": "boolean"

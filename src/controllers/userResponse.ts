@@ -1,9 +1,9 @@
 import { Post, Route, Body } from "tsoa";
-import { Weather, WeatherForUserSpecifiedCity } from "../services/getWeather"
+import { Weather } from "../services/getWeather"
 import { CovidCases } from "../services/getCovidCases"
 
 interface UserResponse {
-    message: string | WeatherForUserSpecifiedCity;
+    message: string;
     successful: boolean;
 }
 
