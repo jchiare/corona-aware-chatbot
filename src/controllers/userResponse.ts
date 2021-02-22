@@ -12,7 +12,7 @@ interface UserChatMessage {
     text: string;
 }
 
-type CityCountry = {
+type WhitelistedCities = {
     name: string;
     countryCode: string;
     moreInfo: string;
@@ -22,7 +22,7 @@ type CityCountry = {
 export default class UserResponseController {
 
 
-    private whitelistedCities: CityCountry[] = [
+    private whitelistedCities: WhitelistedCities[] = [
         { name: 'london', countryCode: 'GB', moreInfo: 'https://www.london.gov.uk/' },
         { name: 'berlin', countryCode: 'DE', moreInfo: 'https://www.visitberlin.de/en/events-berlin' },
         { name: 'paris', countryCode: 'FR', moreInfo: 'https://en.parisinfo.com/' }
@@ -40,7 +40,7 @@ export default class UserResponseController {
                 httpResponseCode: 400,
             }
         }
-        const userSpecifiedCity: CityCountry = this.whitelistedCities.filter(city => city.name === text.toLowerCase())[0]
+        const userSpecifiedCity: WhitelistedCities = this.whitelistedCities.filter(city => city.name === text.toLowerCase())[0]
         if (!userSpecifiedCity) {
             return {
                 message: `City '${text}' is not current allowed or doesn't exist! Please try another city :)`,
