@@ -31,17 +31,21 @@ export class Weather {
     constructor() {
     }
 
-    async getCurrentWeather(city: string): Promise<WeatherForUserSpecifiedCity> {
-        // Request to https://openweathermap.org/api
-        const response: AxiosResponse<WeatherDataApiResponse> = await axios.get(this.WEATHER_API_URL, {
+    async weatherApiRequest(city: string): Promise<AxiosResponse<WeatherDataApiResponse>> {
+        return axios.get(this.WEATHER_API_URL, {
             "params": {
                 q: city,
                 appid: process.env.WEATHER_API_KEY,
                 units: 'metric'
             }
         })
-        if (response.statusText === 'OK') {
-            const { weather: weatherDesc, main } = response.data
+    }
+
+    async getCurrentWeather(apiResponse: AxiosResponse<WeatherDataApiResponse>): Promise<WeatherForUserSpecifiedCity> {
+        // Request to https://openweathermap.org/api
+        //const response  = await this.weatherApiRequest(city)
+        if (apiResponse.statusText === 'OK') {
+            const { weather: weatherDesc, main } = apiResponse.data
             return {
                 shortDescription: weatherDesc[0].main,
                 longerDescription: weatherDesc[0].description,
@@ -49,8 +53,8 @@ export class Weather {
             }
         } else {
             throw new Error(`Non 'OK' API request status return from weather API request. 
-                HTTP response code: ${response['status']}
-                Request URL: ${response['config']['url']}
+                HTTP response code: ${apiResponse.status}
+                Request URL: ${apiResponse.config.url}
             `)
         }
 

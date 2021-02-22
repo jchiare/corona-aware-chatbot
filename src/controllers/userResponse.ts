@@ -33,7 +33,7 @@ export default class UserResponseController {
         // do some API calls based on the city
         const { text } = message
 
-        if(!text) {
+        if (!text) {
             return {
                 message: `Missing 'text' key in the request body`,
                 successful: false,
@@ -49,10 +49,11 @@ export default class UserResponseController {
         }
 
         const cityWeatherService = new Weather()
-        const currentCityWeather = await cityWeatherService.getCurrentWeather(userSpecifiedCity['name'])
+        const weatherOfCity = await cityWeatherService.weatherApiRequest(userSpecifiedCity.name)
+        const currentCityWeather = await cityWeatherService.getCurrentWeather(weatherOfCity)
 
         const countryCovidCasesService = new CovidCases()
-        const activeCovidCases = await countryCovidCasesService.getActiveCovidCasesByCountryCode(userSpecifiedCity['countryCode'])
+        const activeCovidCases = await countryCovidCasesService.getActiveCovidCasesByCountryCode(userSpecifiedCity.countryCode)
 
         if (!activeCovidCases.successful) {
             return {
