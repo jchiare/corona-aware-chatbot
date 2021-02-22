@@ -10,7 +10,7 @@
     "build": "rm -rf dist && tsc",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "swagger": "tsoa spec",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts"
+    "test": "mocha -r ts-node/register test/**/*.spec.ts --timeout 10000"
   },
   "nodemonConfig": {
     "watch": [

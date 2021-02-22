@@ -23,7 +23,7 @@
 					"message": {
 						"type": "string"
 					},
-					"successful": {
+					"safeToVisit": {
 						"type": "boolean"
 					},
 					"httpResponseCode": {
@@ -33,7 +33,7 @@
 				},
 				"required": [
 					"message",
-					"successful"
+					"safeToVisit"
 				],
 				"type": "object",
 				"additionalProperties": false
