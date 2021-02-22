@@ -1,4 +1,3 @@
-// @ts-nocheck
 import axios, { AxiosResponse } from "axios";
 
 require('dotenv').config()
@@ -6,10 +5,11 @@ require('dotenv').config()
 type CountryCovidCases = {
     confirmed: number;
     recovered: number;
+
 }
 
 interface CovidApiResponse {
-    data: CountryCovidCases[];
+    [index: number]: CountryCovidCases;
     statusText: string;
 }
 
