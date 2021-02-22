@@ -15,6 +15,7 @@ type CurrentWeather = {
 interface WeatherDataApi {
     weather: WeatherDescription[];
     main: CurrentWeather;
+    statusText: string;
 }
 
 export interface WeatherForUserSpecifiedCity {
@@ -43,7 +44,7 @@ export class Weather {
                 units: 'metric'
             }
         })
-        if (response['statusText'] === 'OK') {
+        if (response.statusText === 'OK') {
             const { weather: weatherDesc, main } = response.data
             return {
                 shortDescription: weatherDesc[0].main,

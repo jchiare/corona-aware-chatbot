@@ -61,7 +61,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"UserMessage": {
+			"UserChatMessage": {
 				"properties": {
 					"text": {
 						"type": "string"
@@ -129,7 +129,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UserMessage"
+								"$ref": "#/components/schemas/UserChatMessage"
 							}
 						}
 					}
