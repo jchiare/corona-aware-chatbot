@@ -43,7 +43,6 @@ export class Weather {
 
     async getCurrentWeather(apiResponse: AxiosResponse<WeatherDataApiResponse>): Promise<WeatherForUserSpecifiedCity> {
         // Request to https://openweathermap.org/api
-        //const response  = await this.weatherApiRequest(city)
         if (apiResponse.statusText === 'OK') {
             const { weather: weatherDesc, main } = apiResponse.data
             return {
