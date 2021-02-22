@@ -5,6 +5,7 @@ import { CovidCases } from "../services/getCovidCases"
 interface UserResponse {
     message: string;
     successful: boolean;
+    httpResponseCode?: number;
 }
 
 interface UserChatMessage {
@@ -31,11 +32,19 @@ export default class UserResponseController {
     public async userChosenCityResponse(@Body() message: UserChatMessage): Promise<UserResponse> {
         // do some API calls based on the city
         const { text } = message
+
+        if(!text) {
+            return {
+                message: `Missing 'text' key in the request body`,
+                successful: false,
+                httpResponseCode: 400,
+            }
+        }
         const userSpecifiedCity: CityCountry = this.whitelistedCities.filter(city => city.name === text.toLowerCase())[0]
         if (!userSpecifiedCity) {
             return {
                 message: `City '${text}' is not current allowed or doesn't exist! Please try another city :)`,
-                successful: false
+                successful: false,
             }
         }
 
@@ -48,13 +57,13 @@ export default class UserResponseController {
         if (!activeCovidCases.successful) {
             return {
                 message: `Great city! The weather is currently ${currentCityWeather.longerDescription} and ${currentCityWeather.temperature} degrees celcius. ${activeCovidCases.message}. In any case, you can learn more about this great city here: ${userSpecifiedCity.moreInfo}`,
-                successful: false
+                successful: false,
             }
         }
 
         return {
             message: `Amazing city :) The weather is currently ${currentCityWeather.longerDescription} and ${currentCityWeather.temperature} degrees celcius. ${activeCovidCases.message}. You can check out some activities in the city before visiting here: ${userSpecifiedCity.moreInfo}. Hope you have a great time :)`,
-            successful: true
+            successful: true,
         }
     }
 

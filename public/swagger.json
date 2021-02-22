@@ -25,6 +25,10 @@
 					},
 					"successful": {
 						"type": "boolean"
+					},
+					"httpResponseCode": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [

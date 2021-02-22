@@ -13,6 +13,9 @@ router.get("/api/virtualAgent/greeting", async (_req, res) => {
 router.post("/api/userResponse/message", async (req, res) => {
     const controller = new UserResponseController();
     const response = await controller.userChosenCityResponse(req.body);
+    if(response.httpResponseCode){
+        return res.status(response.httpResponseCode).send(response)
+    }
     return res.send(response);
 });
 
