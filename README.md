@@ -26,14 +26,14 @@ For all types of running, install the node modules via
 npm install
 ```
 
-*Dev mode:*
+**Dev mode:**
 1. Run `npm run dev`
 
-*Prod mode*
+**Prod mode**
 1. Transpile TypeScript code to Javascript by running  `npm run build`
 2. Start the node app via `npm run start`
 
-*Test*
+**Tests**
 1. Run `npm run test` to trigger automated mocha tests
 
 ### Data details
