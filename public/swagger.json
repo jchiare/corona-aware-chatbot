@@ -32,8 +32,7 @@
 					}
 				},
 				"required": [
-					"message",
-					"safeToVisit"
+					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
