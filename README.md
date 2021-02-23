@@ -2,6 +2,8 @@
 
 Covid aware chatbot that handles a simple conversation with a user. The user types in a city, displays the current weather, number of active Covid cases in the country, and a link to learn more about the city.
 
+![Sample conversation](https://i.imgur.com/5PG6SNC.gif)
+
 Built with Typescript and Node/Express. Currently only supports three cities. `Berlin`, `Paris`, and `London`.
 
 The developer documentation is available at `<host-url>/docs` once the app is running.
