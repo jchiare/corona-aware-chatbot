@@ -53,7 +53,7 @@ This project uses two main APIs to gather the data.
 - Research and build a front end that allows longer dialogue 
 - Allow bot to handle non-happy paths (such as are you a bot challenges etc)
 - Add tracking (see what missing cities are most request, bounce rates etc)
-- Add automated tests to the services 
+- Add automated tests to the services and mock the API requests
 - Add docker
 
 
