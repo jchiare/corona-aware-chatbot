@@ -2,12 +2,12 @@
   "name": "ultimate-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/src/index.js",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "node build/src/index.js",
     "predev": "npm run swagger",
     "prebuild": "npm run swagger",
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf build && tsc",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "swagger": "tsoa spec",
     "test": "mocha -r ts-node/register test/**/*.spec.ts --timeout 10000"

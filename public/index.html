@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Ultimate AI chat frontend playground</title>
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+        *,
+        :after,
+        :before {
+            box-sizing: border-box
+        }
+
+        body {
+            background: #c5ddeb;
+            font: 14px/20px Lato, Arial, sans-serif;
+            padding: 40px 0;
+            color: #fff
+        }
+
+        .container {
+            margin: 0 auto;
+            width: 0;
+            background: #444753;
+            border-radius: 5px
+        }
+
+        .chat {
+            width: 490px;
+            float: left;
+            background: #f2f5f8;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            color: #434651
+        }
+
+        .chat .chat-header {
+            padding: 20px;
+            border-bottom: 2px solid #fff
+        }
+
+        .chat .chat-header img {
+            float: left
+        }
+
+        .chat .chat-header .chat-about {
+            float: left;
+            padding-left: 10px;
+            margin-top: 6px
+        }
+
+        .chat .chat-header .chat-with {
+            font-weight: 700;
+            font-size: 16px
+        }
+
+        .chat .chat-header .chat-num-messages {
+            color: #92959e
+        }
+
+        .chat .chat-header .fa-star {
+            float: right;
+            color: #d8dadf;
+            font-size: 20px;
+            margin-top: 12px
+        }
+
+        .chat .chat-history {
+            padding: 30px 30px 20px;
+            border-bottom: 2px solid #fff;
+            overflow-y: scroll;
+            height: 575px;
+            scroll-behavior: smooth;
+        }
+
+        .chat .chat-history .message-data {
+            margin-bottom: 15px
+        }
+
+        .chat .chat-history .message-data-time {
+            color: #a8aab1;
+            padding-left: 6px
+        }
+
+        .chat .chat-history .message {
+            color: #fff;
+            padding: 18px 20px;
+            line-height: 26px;
+            font-size: 16px;
+            border-radius: 7px;
+            margin-bottom: 30px;
+            width: 90%;
+            position: relative
+        }
+
+        .chat .chat-history .message:after {
+            bottom: 100%;
+            left: 7%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-bottom-color: #86bb71;
+            border-width: 10px;
+            margin-left: -10px
+        }
+
+        .chat .chat-history .my-message {
+            background: #86bb71
+        }
+
+        .chat .chat-history .other-message {
+            background: #94c2ed
+        }
+
+        .chat .chat-history .other-message:after {
+            border-bottom-color: #94c2ed;
+            left: 93%
+        }
+
+        .chat .chat-message {
+            padding: 30px
+        }
+
+        .chat .chat-message textarea {
+            width: 100%;
+            border: none;
+            padding: 10px 20px;
+            font: 14px/22px Lato, Arial, sans-serif;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            resize: none
+        }
+
+        .chat .chat-message .fa-file-image-o,
+        .chat .chat-message .fa-file-o {
+            font-size: 16px;
+            color: gray;
+            cursor: pointer
+        }
+
+        .chat .chat-message button {
+            float: right;
+            color: #3f8fda;
+            font-size: 16px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            background: #f2f5f8
+        }
+
+        .chat .chat-message button:hover {
+            color: #3173b1
+        }
+
+        .me,
+        .online {
+            margin-right: 3px;
+            font-size: 10px
+        }
+
+        .online {
+            color: #86bb71
+        }
+
+        .me {
+            color: #94c2ed
+        }
+
+        .align-right {
+            text-align: right
+        }
+
+        .float-right {
+            float: right
+        }
+
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0
+        }
+
+        li {
+            list-style: none
+        }
+
+        .hidden {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container clearfix">
+        <div class="chat">
+            <div class="chat-header clearfix">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+
+                <div class="chat-about">
+                    <div class="chat-with">Chat with Ultimate AI</div>
+                    <div class="chat-num-messages">Ask me about a location .. like Paris</div>
+                </div>
+                <i class="fa fa-star"></i>
+            </div>
+
+            <div class="chat-history">
+                <ul id="chat">
+                    <li class="clearfix hidden" id="initial-agent-message">
+                        <div class="message-data">
+                            <span class="message-data-name"><i class="fa fa-circle online"></i> Ultimate AI</span>
+                            <span class="message-data-time">10:12 AM, Today</span>
+                        </div>
+                        <p class="message my-message">
+                        </p>
+                    </li>
+
+                    <li class="clearfix hidden" id="user-message">
+                        <div class="message-data align-right">
+                            <span class="message-data-time">10:14 AM, Today</span> &nbsp;
+                            &nbsp; <span class="message-data-name">You</span>
+                        </div>
+                        <p class="message other-message float-right">
+                        </p>
+                    </li>
+
+                    <li class="hidden" id="agent-message">
+                        <div class="message-data">
+                            <span class="message-data-name"> Ultimate AI</span>
+                            <span class="message-data-time">10:20 AM, Today</span>
+                        </div>
+                        <p class="message my-message">
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="chat-message clearfix">
+                <textarea name="message-to-send" id="message-to-send" placeholder="Type your message"
+                    rows="3"></textarea>
+
+                <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+                <i class="fa fa-file-image-o"></i>
+                <button style="float:left;font-size:14px" onclick="window.location.reload();">Reset</button>
+                <button onclick="buttonClicked()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const localApiRequest = async (path, message = undefined) => {
+            let apiResponseData;
+            if (message) {
+                apiResponseData = await fetch(`/api/${path}`, {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+
+                    },
+                    body: JSON.stringify({ 'text': message })
+                })
+            } else {
+                apiResponseData = await fetch(`/api/${path}`)
+            }
+            return await apiResponseData.json()
+        }
+
+        const addMessageToChatUI = (targetDomElement, message) => {
+            document.querySelector(`#${targetDomElement} p`).innerText = message
+            document.querySelector(`#${targetDomElement}`).classList.remove('hidden')
+        }
+
+        const getUserText = () => {
+            const userText = document.querySelector('#message-to-send').value.trim()
+            setTimeout(() => document.querySelector('#message-to-send').value = "", 200)
+            return userText
+        }
+
+        const initEnterKeypressListener = () => {
+            document.addEventListener('keyup', event => {
+                if (event.keyCode === 13) { // Return or Enter keypress
+                    addMessageToChatUI('user-message', getUserText())
+                    actOnUserMessage()
+                }
+            })
+        }
+
+        const buttonClicked = () => {
+            addMessageToChatUI('user-message', getUserText())
+            actOnUserMessage()
+        }
+
+        const sendAgentGreeting = async () => {
+            const res = await localApiRequest('virtualAgent/greeting')
+            setTimeout(() => addMessageToChatUI('initial-agent-message', res.message), 1000)
+        }
+
+        const actOnUserMessage = async () => {
+            const res = await localApiRequest('userResponse/message', getUserText())
+            setTimeout(() => {
+                addMessageToChatUI('agent-message', res.message)
+                document.querySelector('.chat-history').scrollTop = 200
+            }, 1000)
+        }
+
+
+        window.onload = function () {
+            initEnterKeypressListener()
+            sendAgentGreeting()
+        }
+    </script>
+
+</body>
+
+</html>
