@@ -68,8 +68,7 @@ const sendBtnHandler = () => addMessageToChatUI(DOM_ELEMENTS_ID.user_message, ge
 
 const initEnterKeypressListener = () => {
     document.addEventListener("keyup", (event) => {
-        if (event.keyCode === 13) {
-            // Return or Enter keypress
+        if (event.key === 'Enter') {
             addMessageToChatUI(DOM_ELEMENTS_ID.user_message, getUserTextInput());
         }
     });
